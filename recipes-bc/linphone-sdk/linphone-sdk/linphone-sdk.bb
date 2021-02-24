@@ -4,19 +4,8 @@ inherit gitpkgv
 
 PR = "${INC_PR}.0"
 
-python () {
-# 3 possible revisions:
-# - if env[LATEST_REVISIONS] is set, use yocto autorev mecanism
-# - if env[LINPHONE_SDK_REV] is defined, use the value as the revision (useful for continous integration)
-# - Otherwise, use fixed stable revision
-
-    if os.getenv('LATEST_REVISIONS', '') == "1":
-        d.setVar('SRCREV', "${AUTOREV}")
-    else:
-        d.setVar('SRCREV', os.getenv('LINPHONE_SDK_REV', '9663ba5f620955a54e4b3d42fce27bb387f26f90'))
-    
-    d.setVar('LINPHONE_SDK_BRANCH', os.getenv('LINPHONE_SDK_BRANCH', 'master'))
-}
+# 4.4.31
+SRCREV = "d4d6356a615e2eec7ea1a957ec40f6fd143f6006"
 
 # TODO set SRCREV to a fixed stable version after merge of yocto-sumo branch
 
@@ -27,7 +16,7 @@ python () {
     print(d.getVar('SRCREV', True))
 }
 
-SRC_URI = "gitsm://gitlab.linphone.org/BC/public/linphone-sdk.git;protocol=https;branch=${LINPHONE_SDK_BRANCH};"
+SRC_URI = "gitsm://gitlab.linphone.org/BC/public/linphone-sdk.git;protocol=https;branch=release/4.4;"
 
 PV = "git_${SRCREV}"
 PKGV = "${GITPKGVTAG}"
