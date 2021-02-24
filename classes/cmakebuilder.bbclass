@@ -87,7 +87,7 @@ def map_host_arch_to_uname_arch(host_arch):
         return "ppc64"
     return host_arch
 
-cmake_do_generate_toolchain_file() {
+cmakebuilder_do_generate_toolchain_file() {
 	if [ "${BUILD_SYS}" = "${HOST_SYS}" ]; then
 		cmake_crosscompiling="set( CMAKE_CROSSCOMPILING FALSE )"
 	fi
@@ -114,7 +114,8 @@ set( CMAKE_CXX_LINK_FLAGS "${OECMAKE_CXX_LINK_FLAGS}" CACHE STRING "LDFLAGS" )
 
 # only search in the paths provided so cmake doesnt pick
 # up libraries and tools from the native build machine
-set( CMAKE_FIND_ROOT_PATH ${STAGING_DIR_HOST} ${STAGING_DIR_NATIVE} ${CROSS_DIR} ${OECMAKE_PERLNATIVE_DIR} ${OECMAKE_EXTRA_ROOT_PATH} ${EXTERNAL_TOOLCHAIN} ${HOSTTOOLS_DIR})
+# BC modify: it makes more sense to put OECMAKE_EXTRA_ROOT_PATH first in the list order matters for cmake, and we should prefer custom paths for libraries/executables/includes search.
+set( CMAKE_FIND_ROOT_PATH ${OECMAKE_EXTRA_ROOT_PATH} ${STAGING_DIR_HOST} ${STAGING_DIR_NATIVE} ${CROSS_DIR} ${OECMAKE_PERLNATIVE_DIR} ${EXTERNAL_TOOLCHAIN} ${HOSTTOOLS_DIR})
 set( CMAKE_FIND_ROOT_PATH_MODE_PACKAGE ONLY )
 set( CMAKE_FIND_ROOT_PATH_MODE_PROGRAM ${OECMAKE_FIND_ROOT_PATH_MODE_PROGRAM} )
 set( CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY )
@@ -148,7 +149,7 @@ addtask generate_toolchain_file after do_patch before do_configure
 
 CONFIGURE_FILES = "CMakeLists.txt"
 
-cmake_do_configure() {
+cmakebuilder_do_configure() {
 	if [ "${OECMAKE_BUILDPATH}" ]; then
 		bbnote "cmake.bbclass no longer uses OECMAKE_BUILDPATH.  The default behaviour is now out-of-tree builds with B=WORKDIR/build."
 	fi
@@ -207,12 +208,12 @@ cmake_runcmake_build() {
 	eval ${DESTDIR:+DESTDIR=${DESTDIR} }${CMAKE_VERBOSE} cmake --build '${B}' "$@" -- ${EXTRA_OECMAKE_BUILD}
 }
 
-cmake_do_compile()  {
+cmakebuilder_do_compile()  {
 	cmake_runcmake_build --target ${OECMAKE_TARGET_COMPILE}
 }
 
-cmake_do_install() {
-	DESTDIR='${D}' cmake_runcmake_build --target ${OECMAKE_TARGET_INSTALL}
-}
+# cmakebuilder_do_install() {
+# 	DESTDIR='${D}' cmake_runcmake_build --target ${OECMAKE_TARGET_INSTALL}
+# }
 
-EXPORT_FUNCTIONS do_configure do_compile do_install do_generate_toolchain_file
+EXPORT_FUNCTIONS do_configure do_compile do_generate_toolchain_file
