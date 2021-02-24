@@ -6,7 +6,7 @@ SECTION_linphonec =  "console/network"
 
 INC_PR = "r0"
 
-DEPENDS = "git-native doxygen-native mariadb pulseaudio alsa-lib virtual/gettext sqlite3 mariadb zlib perl-native ${VERSION_DEPENDENT_DEPENDS}"
+DEPENDS = "git-native doxygen-native python3native python3-pystache-native python3-six-native mariadb pulseaudio alsa-lib virtual/gettext sqlite3 mariadb zlib perl-native"
 
 PROVIDES = "linphone-sdk"
 
