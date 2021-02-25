@@ -6,7 +6,7 @@ SECTION_linphonec =  "console/network"
 
 INC_PR = "r0"
 
-DEPENDS = "git-native doxygen-native python3-native python3-pystache-native python3-six-native mariadb pulseaudio alsa-lib virtual/gettext sqlite3 mariadb zlib perl-native"
+DEPENDS = "git-native doxygen-native python3-native python3-pystache-native python3-six-native pulseaudio alsa-lib virtual/gettext sqlite3 zlib perl-native"
 
 PROVIDES = "linphone-sdk"
 
@@ -28,7 +28,7 @@ PACKAGECONFIG[bzrtp]= " -DENABLE_BZRTP=YES, -DENABLE_BZRTP=NO"
 PACKAGECONFIG[mdns]= "-DENABLE_MDNS=YES,-DENABLE_MDNS=NO"
 
 EXTRA_OECMAKE ??= " "
-EXTRA_OECMAKE += " -DENABLE_CONSOLE_UI=NO -DENABLE_GTK_UI=NO -DENABLE_CXX_WRAPPER=YES -DENABLE_VCARD=YES -DENABLE_VPX=NO -DENABLE_XML2=NO -DENABLE_SQLITE=NO -DENABLE_ZLIB=NO -DENABLE_SOCI_MYSQL=YES"
+EXTRA_OECMAKE += " -DENABLE_CONSOLE_UI=NO -DENABLE_GTK_UI=NO -DENABLE_CXX_WRAPPER=YES -DENABLE_VCARD=YES -DENABLE_VPX=NO -DENABLE_XML2=NO -DENABLE_SQLITE=YES -DENABLE_ZLIB=NO -DENABLE_SOCI_MYSQL=NO"
 
 EXTRA_OECMAKE += " -DENABLE_UNIT_TESTS=YES -DENABLE_TESTS=YES"
 
