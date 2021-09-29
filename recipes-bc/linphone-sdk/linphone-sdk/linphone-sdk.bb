@@ -4,8 +4,8 @@ inherit gitpkgv
 
 PR = "${INC_PR}.0"
 
-# based on 4.4.31
-SRCREV = "46257fc55f4c43e048304fbb82e677096c201784"
+# based on 5.0.27
+SRCREV = "9e732013075c578fa4d54b4e535757af196212d7"
 
 # TODO set SRCREV to a fixed stable version after merge of yocto-sumo branch
 
@@ -16,8 +16,7 @@ python () {
     print(d.getVar('SRCREV', True))
 }
 
-# SRC_URI = "gitsm://gitlab.linphone.org/BC/public/linphone-sdk.git;protocol=https;branch=release/4.4;"
-SRC_URI = "gitsm://github.com/AiflooAB/linphone-sdk.git;protocol=https;branch=master;"
+SRC_URI = "gitsm://gitlab.linphone.org/BC/public/linphone-sdk.git;protocol=https;branch=release/5.0;"
 
 PV = "git_${SRCREV}"
 PKGV = "${GITPKGVTAG}"
