@@ -6,7 +6,8 @@ B = "${WORKDIR}/build"
 
 # What CMake generator to use.
 # The supported options are "Unix Makefiles" or "Ninja".
-OECMAKE_GENERATOR ?= "Ninja"
+#OECMAKE_GENERATOR ?= "Ninja"
+OECMAKE_GENERATOR ?= "Unix Makefiles"
 
 python() {
     generator = d.getVar("OECMAKE_GENERATOR")
