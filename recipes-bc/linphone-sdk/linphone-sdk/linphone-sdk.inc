@@ -41,7 +41,7 @@ python () {
 }
 
 SRC_URI = "gitsm://gitlab.linphone.org/BC/public/linphone-sdk.git;protocol=https;branch=${LINPHONE_SDK_BRANCH};"
-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=ff3103b5db8ba4e2c66c511b7a73e407"
+LIC_FILES_CHKSUM ??= "file://LICENSE.txt;md5=ff3103b5db8ba4e2c66c511b7a73e407"
 
 PACKAGECONFIG ??= "sqlite zlib bzrtp ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'video', '', d)}"
 PACKAGECONFIG[sqlite] = "-DENABLE_SQLITE_STORAGE=yes, -DENABLE_SQLITE_STORAGE=no"
